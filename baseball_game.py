@@ -286,7 +286,6 @@ def print_wrong_input():  # 사용자 알림에 사용
 def main():
     print("Play Baseball")
     user_input = 999
-    result = []
     
     while(True): # [A]
 
@@ -303,6 +302,7 @@ def main():
                 continue
         
             # 3. 게임 결과 출력 및 확인
+            result = []
             result = get_strikes_or_ball(user_input, random_number)
             print(f'Strikes : {result[0]}, Balls : {result[1]}')
 
