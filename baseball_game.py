@@ -32,11 +32,7 @@ def is_digit(user_input_number):
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당
     
-    result = True
-    for w in user_input_number:
-        if not w.isdigit(): # 하나라도 숫자가 아니면 False
-            return False
-
+    result = user_input_number.isdigit()
     # ==================================
     return result
 
@@ -302,7 +298,7 @@ def main():
                 continue
         
             # 3. 게임 결과 출력 및 확인
-            result = []
+            result = [0, 0]
             result = get_strikes_or_ball(user_input, random_number)
             print(f'Strikes : {result[0]}, Balls : {result[1]}')
 
