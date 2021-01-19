@@ -155,7 +155,7 @@ def get_not_duplicated_three_digit_number():  # random 숫자에 사용
     # get_random_number() 함수를 사용하여 random number 생성
 
     result = get_random_number()
-    while(is_duplicated_number(result)):
+    while(is_duplicated_number(str(result))):
         result = get_random_number() # 중복되는 수라면 다시 값을 받아옴
 
     # ==================================
@@ -282,6 +282,7 @@ def print_wrong_input():  # 사용자 알림에 사용
 def main():
     print("Play Baseball")
     user_input = 999
+    end_input = False
     again = 'n'
     
     while(True): # [A]
@@ -291,33 +292,38 @@ def main():
         print("Random Number is : ", random_number)
 
         # 2. 조건을 만족하는 사용자 숫자를 가져옴 - [B]
-        while(True):
+        while user_input != random_number:
             user_input = input('Input guess number : ')
+
+            if user_input == "0": # -- 또다른 종료조건 -- #
+                end_input = True
+                break
 
             if not is_validated_number(user_input): # 안쪽의 사용자 루프 continue
                 print_wrong_input()
                 continue
         
             # 3. 게임 결과 출력 및 확인
-            result = [0, 0]
-            result = get_strikes_or_ball(user_input, random_number)
-            print(f'Strikes : {result[0]}, Balls : {result[1]}')
+            strike, ball = get_strikes_or_ball(user_input, random_number)
+            print(f'Strikes : {strike}, Balls : {ball}')
 
-            if result == [3, 0]: # 답이 맞으면 안쪽의 사용자 루프 break
-                break # [B]
-            # if result[0] == 3 and result[1] == 0: # 답이 맞으면 안쪽의 사용자 루프 break
-            #     break # [B]
+        if end_input: # -- 또다른 종료조건 -- #
+            break
 
         # 4. 게임 진행 여부 선택 - [C]
         while(True):
-            again = input("You win, one more(Y/N)?")
+            user_input = input("You win, one more(Y/N)?")
 
-            if(is_yes(again) or is_no(again)): # 답이 맞으면 게임 진행 여부 루프 break
+            if user_input == "0": # -- 또다른 종료조건 -- #
+                end_input = True
+                break
+
+            if(is_yes(user_input) or is_no(user_input)): # 답이 맞으면 게임 진행 여부 루프 break
                 break # [C]
 
             print_wrong_input() # 답과 다르다면 wrong 출력
 
-        if is_no(again): # 바깥쪽의 게임 진행 루프 break
+        if is_no(user_input) or end_input: # 바깥쪽의 게임 진행 루프 break
             break # [A]
 
     # ==================================
