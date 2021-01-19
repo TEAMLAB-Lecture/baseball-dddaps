@@ -306,7 +306,9 @@ def main():
             result = get_strikes_or_ball(user_input, random_number)
             print(f'Strikes : {result[0]}, Balls : {result[1]}')
 
-            if result == [3, 0]: # 답이 맞으면 안쪽의 사용자 루프 break
+            # if result == [3, 0]: # 답이 맞으면 안쪽의 사용자 루프 break
+            #     break # [B]
+            if result[0] == 3 and result[1] == 0: # 답이 맞으면 안쪽의 사용자 루프 break
                 break # [B]
 
         # 4. 게임 진행 여부 선택 - [C]
